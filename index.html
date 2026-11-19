@@ -1,0 +1,33 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>وزاريات السادس العلمي</title>
+<style>
+*{box-sizing:border-box}body{margin:0;background:#f6f4fa;color:#242033;font-family:system-ui,-apple-system,"Segoe UI",sans-serif}
+main{max-width:850px;margin:36px auto;padding:20px}.panel{background:white;border:1px solid #e7e1ef;border-radius:18px;padding:22px;box-shadow:0 8px 28px #34204b0c}
+h1{margin:0 0 8px;color:#6d3c91}p{color:#665f70;line-height:1.8}
+.controls{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin:22px 0}
+select,textarea,button{font:inherit;border-radius:10px;padding:12px;border:1px solid #d9d1e3;width:100%}
+textarea{min-height:150px;resize:vertical;margin:12px 0}
+button{background:#74469a;color:white;border:0;cursor:pointer;font-weight:700}
+.answer{display:none;background:#f4eff8;border-radius:12px;padding:16px;margin-top:14px;line-height:1.9}
+.note{font-size:14px;background:#fff8e8;border:1px solid #f0dfb6;border-radius:12px;padding:14px;margin-top:18px}
+@media(max-width:600px){main{margin:10px auto}.controls{grid-template-columns:1fr}}
+</style></head>
+<body><main><section class="panel">
+<h1>وزاريات السادس العلمي</h1>
+<p>اختاري المادة والفصل، ثم اكتبي إجابتج واضغطي «كشف الإجابة» لعرض الجواب النموذجي.</p>
+<div class="controls">
+<select id="subject"><option value="">اختاري المادة</option><option>التربية الإسلامية</option><option>اللغة العربية</option><option>اللغة الإنجليزية</option><option>الأحياء</option><option>الكيمياء</option><option>الفيزياء</option><option>الرياضيات</option></select>
+<select id="term"><option value="">اختاري الفصل</option><option>الفصل الأول</option><option>الفصل الثاني</option></select>
+</div>
+<div id="question">لم يُضف بنك الأسئلة الوزارية الموثق بعد.</div>
+<textarea id="studentAnswer" placeholder="اكتبي إجابتج هنا..." aria-label="إجابتك"></textarea>
+<button id="reveal">كشف الإجابة</button>
+<div class="answer" id="modelAnswer"></div>
+<div class="note">تنبيه: لم تُحمّل الأسئلة والأجوبة الوزارية الموثقة في هذه النسخة بعد؛ لذلك لن نعرض أسئلة أو أجوبة غير موثقة على أنها وزارية.</div>
+</section></main>
+<script>
+document.getElementById('reveal').addEventListener('click',()=>{const a=document.getElementById('modelAnswer');a.style.display='block';a.textContent='لا توجد إجابة نموذجية موثقة لهذا الاختيار حتى الآن.';});
+</script></body></html>
