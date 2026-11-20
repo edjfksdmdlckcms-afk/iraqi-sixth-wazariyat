@@ -2,48 +2,72 @@
 <html lang="ar" dir="rtl">
 <head>
 <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-<title>وزاريات السادس العلمي | تدريب</title>
+<title>وزاريات السادس العلمي | القواعد</title>
 <style>
-*{box-sizing:border-box}body{margin:0;background:#f5f3f8;color:#272333;font-family:system-ui,-apple-system,"Segoe UI",sans-serif}
-main{max-width:900px;margin:28px auto;padding:16px}.panel{background:#fff;border:1px solid #e8e1ef;border-radius:18px;padding:22px;box-shadow:0 8px 28px #34204b10}
-h1{margin:0 0 8px;color:#704394;font-size:26px}p{color:#655d70;line-height:1.8}
-.meta{font-size:13px;color:#6c6376;background:#f7f3fa;padding:10px 12px;border-radius:10px;margin:14px 0}
+:root{--ink:#292337;--purple:#70439a;--pale:#f5f0fa;--line:#e5ddec}
+*{box-sizing:border-box}body{margin:0;background:#f6f4f8;color:var(--ink);font-family:system-ui,-apple-system,"Segoe UI",sans-serif}
+main{max-width:900px;margin:28px auto;padding:16px}.panel{background:white;border:1px solid var(--line);border-radius:20px;padding:22px;box-shadow:0 8px 30px #3020400d}
+h1{margin:0;color:var(--purple);font-size:25px} .sub{color:#6e6678;line-height:1.8;margin:8px 0 18px}
 .top{display:flex;gap:10px;flex-wrap:wrap;align-items:center;justify-content:space-between}
-select,textarea,button{font:inherit;border-radius:11px;padding:12px;border:1px solid #d9d1e3}
-select{min-width:180px;flex:1;background:white}textarea{width:100%;min-height:110px;resize:vertical;margin:12px 0}
-button{cursor:pointer;font-weight:700}.primary{background:#74469a;color:white;border:0}.secondary{background:white;color:#59416d}
-.qnum{color:#7b5796;font-weight:700}.question{font-size:19px;line-height:2;margin:20px 0}.answer{display:none;background:#f3eff8;border-right:4px solid #8154a4;border-radius:12px;padding:16px;margin-top:14px;line-height:2;white-space:pre-wrap}
-.nav{display:flex;gap:10px;margin-top:16px}.nav button{flex:1}.small{font-size:12px;color:#82798a}
-@media(max-width:600px){main{margin:8px auto}.panel{padding:16px}.question{font-size:17px}}
+select,input,textarea,button{font:inherit;border-radius:11px;border:1px solid #dcd3e5;padding:11px}
+select{background:#fff;min-width:180px}.bar{display:flex;gap:10px;flex-wrap:wrap;margin:16px 0}
+.bar input{flex:1;min-width:180px}.count{color:#756b80;font-size:14px}
+.card{border:1px solid var(--line);border-radius:16px;padding:18px;margin:14px 0;background:#fff}
+.meta{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:12px}.tag{font-size:12px;background:var(--pale);color:#67418a;padding:5px 9px;border-radius:20px}
+.qnum{font-weight:800;color:var(--purple)}.question{font-size:17px;line-height:1.9;font-weight:650;white-space:pre-wrap}
+textarea{width:100%;min-height:88px;margin-top:14px;resize:vertical}
+button{background:var(--purple);color:#fff;border:0;font-weight:700;cursor:pointer;margin-top:10px}
+.answer{display:none;background:#f6f2fa;border-right:4px solid #8c65ad;border-radius:10px;padding:14px;margin-top:12px;line-height:1.95;white-space:pre-wrap}
+.controls{display:flex;gap:8px;align-items:center;flex-wrap:wrap}.small{background:#eee8f4;color:#54376e}
+footer{font-size:13px;color:#756b80;line-height:1.8;margin-top:20px}
+@media(max-width:600px){main{margin:8px auto;padding:8px}.panel{padding:14px}}
 </style></head>
 <body><main><section class="panel">
-<h1>وزاريات السادس العلمي</h1>
-<p>اختاري السؤال، اكتبي إجابتج، وبعدها اضغطي «كشف الإجابة» حتى تشوفين جواب الملزمة.</p>
-<div class="top"><select id="subject"><option>اللغة العربية – القواعد</option></select><select id="chapter"><option>التصديق والتصور وخصائص (الهمزة – هل)</option></select></div>
-<div class="meta">المصدر: وزاريات القواعد – الأستاذ حمزة الجابري، 2027، الجزء الأول. هذه نسخة تجربة أولية من الأسئلة التي تم التحقق من صفحاتها.</div>
-<div class="qnum" id="number"></div>
-<div class="question" id="question"></div>
-<textarea id="student" placeholder="اكتبي إجابتج هنا..."></textarea>
-<button class="primary" id="reveal">كشف الإجابة</button>
-<div class="answer" id="answer"></div>
-<div class="nav"><button class="secondary" id="prev">السابق</button><button class="secondary" id="next">التالي</button></div>
-<p class="small" id="count"></p>
+<div class="top"><div><h1>وزاريات السادس العلمي</h1><div class="sub">اللغة العربية — القواعد | الاستفهام والتصديق والتصور وخصائص (الهمزة – هل)</div></div><span class="tag">تجربة أولية · 34 سؤالاً</span></div>
+<div class="bar"><select id="filterYear"><option value="">كل السنوات والأدوار</option></select><input id="search" placeholder="ابحثي داخل الأسئلة أو السنة..."></div>
+<div class="controls"><span class="count" id="count"></span><button class="small" id="reset">إعادة ضبط البحث</button></div>
+<div id="questions"></div>
+<footer>المصدر: ملزمة وزاريات قواعد اللغة العربية — الأستاذ حمزة الجابري، 2027، الجزء الأول، الصفحات المطبوعة 2–5. هذه تجربة أولية للجزء الظاهر من الملزمة، مع المحافظة على ترتيب الأسئلة وأجوبتها كما وردت في الصفحات.</footer>
 </section></main>
 <script>
-const questions=[
-{q:"وضّحي الاستفهام الوارد في البيت، وبيّني نوعه والدليل عليه.",a:"الاستفهام بالهمزة المحذوفة.\nنوعه: تصوّري.\nالدليل: وجود (أم) المعادلة.",years:"الدور الثاني 1987"},
-{q:"في قوله تعالى: «أَوَلَمْ تَكُنْ لَهُمْ آيَةٌ...»؛ لماذا لا يجوز أن يكون الاستفهام بغير الهمزة؟ وما نوع الاستفهام؟",a:"لا يجوز؛ لأن (هل) لا تدخل على الجملة المنفية.\nنوع الاستفهام: تصديقي.",years:"الدور الأول 1990، والدور الأول 2017"},
-{q:"في البيت الشعري الوارد بالملزمة: أعربي حرف الاستفهام المحذوف من موضعه.",a:"حرف استفهام مبني على الفتح، لا محل له من الإعراب.",years:"الدور الأول 1990"},
-{q:"في قوله تعالى: «أَفَلَمْ يَسِيرُوا فِي الْأَرْضِ...»؛ هل يمكن استبدال (هل) بالهمزة؟ علّلي.",a:"لا؛ لأن (هل) لا تدخل على الجملة المنفية.",years:"الدور الأول 1995، الدور الثاني 1990، الدور الثاني 2012"},
-{q:"ما نوع الاستفهام الوارد في البيت الشعري الخامس؟ ولماذا؟",a:"نوع الاستفهام: تصوّري؛ لأن الإجابة عنه تكون بالتعيين.",years:"الدور الثاني 1990"},
-{q:"في قول الشاعر: «عيدٌ بأية حالٍ عُدتَ يا عيدُ»؛ ما نوع الاستفهام في الشطر الثاني؟ وضّحيه وبيّني الدليل.",a:"استفهام تصوّري بالهمزة المحذوفة، والتقدير كما ورد في الملزمة.\nالدليل: وجود (أم) المعادلة.",years:"الدور الأول 1991"},
-{q:"في قول الشاعر: «ومالي إلى العباس...»؛ ما خصوصية الهمزة؟ وهل يجوز استبدالها بـ(هل)؟",a:"حُذفت الهمزة من الكلام للتخفيف والتقدير.\nلا يجوز الاستبدال؛ لأن (هل) لا تدخل على الجملة المنفية.",years:"الدور الأول 1992"}
+const data = [
+{n:1,y:"1987/2",q:"ذَروني وشأني والوعي لا مَلابيا\nإلى الموت أسعى أم إلى الموت أركب\nوضح الاستفهام في البيت وبيّن نوعه والدليل عليه.",a:"الاستفهام بالهمزة المحذوفة (أإلى الموت أسعى...)، نوعه: تصوري.\nالدليل: وجود (أم) المعادلة."},
+{n:2,y:"2017/ت · 1990/1",q:"قال تعالى: ﴿أَوَلَمْ تَكُنْ فِتْنَتُهُمْ إِلَّا أَنْ قَالُوا﴾\nلماذا لا يجوز أن يكون الاستفهام بغير الهمزة؟ وماذا نسمي الاستفهام؟",a:"لأن (هل) لا تدخل على الجملة المنفية، يسمى: تصديقي.\nأو: لأن الاستفهام المنفي لا يكون إلا بالهمزة."},
+{n:3,y:"1990/1",q:"أشوقاً ولما يمضِ لي غير ليلةٍ\nفكيف إذا خبّ المطِي بنا عشراً\nأعرب ما تحته خط.",a:"(أ): حرف استفهام مبني على الفتح لا محل له من الإعراب."},
+{n:4,y:"1995/1 · 2012/2 · 1990/2",q:"قال تعالى: ﴿أَفَلَمْ يَسِيرُوا فِي الْأَرْضِ فَيَنْظُرُوا كَيْفَ كَانَ عَاقِبَةُ الَّذِينَ مِنْ قَبْلِهِمْ﴾\nأولاً: أيمكنك استبدال (هل) بالهمزة لو ورد مثلها في غير النص الكريم؟\nثانياً: ما في الآية خصوصية من خصائص الهمزة، دل عليها.\nثالثاً: ما نوع الاستفهام الوارد أولاً؟",a:"أولاً: لا يمكن؛ لأن (هل) لا تدخل على الجمل المنفية.\nثانياً: في الآية خصوصية من خصائص الهمزة، إذ دخلت على الجملة المنفية.\nثالثاً: تصديقي."},
+{n:5,y:"1990/2",q:"فأصبحتُ فيهم آمناً لا كمَفْشَرٍ\nأتوني فقالوا من ربيعة أم مضر\nما نوع الاستفهام الوارد في قول الشاعر؟ ولماذا؟",a:"نوع الاستفهام: تصوري؛ السبب: لأن الإجابة عنه بالتعيين."},
+{n:6,y:"1991/1",q:"عيدٌ بأية حالٍ عُدتَ يا عيدُ\nبما مضى أم لأمرٍ فيك تجديدُ\nفي الشطر الثاني استفهام، وضّحه، وبيّن الدليل الذي ساعدك على الوصول إليه.",a:"استفهام تصوري بالهمزة المحذوفة والتقدير (أبما مضى؟).\nالدليل: وجود (أم) المعادلة."},
+{n:7,y:"1992/1",q:"وقالت له العباس قلت فمن إذن\nومالي إلى العباس معبدٌ ولا قصر\nأولاً: ما خصوصية الهمزة؟ ثم استبدل (هل) بها.\nثانياً: ما نوع الاستفهام في الأداة الثانية؟ ولماذا؟",a:"أولاً: الهمزة المحذوفة من الكلام للتخفيف والتقدير (أإلى العباس؟). لا يجوز الاستبدال؛ لأن (هل) لا تدخل على الجملة المنفية.\nثانياً: تصوري؛ لأن الإجابة عنه بالتعيين."},
+{n:8,y:"1992/2",q:"إيهِ نسرَ الصحراءِ ماذا أغنى\nلهبَ ذاك أم صدى إنشادي\nما نوع الاستفهام في أداته الثانية؟",a:"نوع الاستفهام: تصوري والتقدير (ألهب ذاك...؟)."},
+{n:9,y:"1993/1",q:"ولا أفرط في حق غداً لبيب\nفضلاً أما تعرف الإحسان إنسان\nأيمكنك وضع (هل) مكان الهمزة؟ علل إجابتك.",a:"لا يجوز؛ لأن (هل) لا تدخل على الجملة المنفية."},
+{n:10,y:"1993/2",q:"قال تعالى: ﴿أَفَبِنِعْمَةِ اللَّهِ يَجْحَدُونَ﴾\nللهمزة خصائص، فأي منها ورد في النص الكريم؟ علل ذلك.",a:"أفبنعمة: لها الصدارة في الكلام لأنها سبقت حرف العطف (الفاء)."},
+{n:11,y:"1993/2",q:"دمية حسناء تغري النظرَا\nأم ملاك طاهر فوق الثرى\nقدّر الهمزة المحذوفة في قول الشاعر.",a:"حذفت الهمزة من الكلام للتخفيف والتقدير (أدمية حسناء؟)."},
+{n:12,y:"1994/1 · 2015/ت",q:"قال تعالى: ﴿قَالَ أَتَتَّخِذُونَ أَصْنَامًا آلِهَةً﴾\nما أبرز خصوصية للهمزة التي اختلفت بها عن (هل)؟",a:"حذفت الهمزة من الكلام للتخفيف والتقدير (أأتتخذون...)."},
+{n:13,y:"1994/2",q:"قال تعالى: ﴿وَلَئِنْ أَخَّرْنَا عَنْهُمُ الْعَذَابَ إِلَى أُمَّةٍ مَعْدُودَةٍ لَيَقُولُنَّ مَا يَحْبِسُهُ﴾\nما معنى اسم الاستفهام؟",a:"الاستفهام للذات غير العاقلة."},
+{n:14,y:"1995/1",q:"حاور الحجاج رجلاً فقال له: (أشاعر أنت أم خطيب؟) قال: (الأمران كلاهما).\nما خصوصية الهمزة؟",a:"أشاعر: الاستفهام بها للتصور."},
+{n:15,y:"1995/2",q:"قال تعالى: ﴿فَهَلْ عَلَى الرُّسُلِ إِلَّا الْبَلَاغُ الْمُبِينُ﴾\nأيجوز استبدال الهمزة بـ(هل) لو ورد مثلها في غير النص الكريم؟ وما خصوصية الهمزة بعد الاستبدال؟",a:"نعم يجوز؛ لأن (هل) لها الصدارة في الكلام لأنها سبقت حرف العطف (الفاء)."},
+{n:16,y:"1995/2 · 2022/ت1 · 2026/ت2",q:"أنجومُ ليلٍ أين بدري طالعاً\nأومنه ما تتعلمين أفولاً\nأولاً: استبدل (هل) بأداة الاستفهام الثانية.\nثانياً: وردت (الهمزة) مرتين، فما نوعها في كل مرة؟",a:"أولاً: استبدل بأداة الاستفهام الثانية (هل)، والتقدير: وهل منه...؟\nثانياً: أنجوم: همزة نداء. أومنه: همزة استفهام."},
+{n:17,y:"1996/1",q:"أما سمعتَ تطبيقي في مجالسهم\nولا قرار لهم ما صح في الدار\nلماذا لا يجوز استبدال (هل) بالهمزة في هذه الحالة؟",a:"لأن (هل) لا تدخل على الجملة المنفية."},
+{n:18,y:"1996/2",q:"قال المأمون لأحد قضاته: (أفتحتسب أصحابي ولي بهم حاجة)؟\nماذا يسمى الاستفهام؟ وفيم اتسمت الهمزة؟ وكيف تقول لو كانت الأداة (هل)؟",a:"أفتحتسب: تصديقي، لها الصدارة في الكلام لأنها سبقت حرف العطف (الفاء).\nفهل تحتسب أصحابي؟"},
+{n:19,y:"1997/2",q:"أيا راكب الوجناء هل أنت عالمٌ\nفداك نفسي كيف تلك المعالم\n(الهمزة) بالبيت (هل) جاءت للاستفهام تصوراً.\nأعالم أنت أم جاهل؟ أو أعالم أنت أم غير عالم؟",a:"الاستفهام تصوري؛ لأن وجود (أم) المعادلة يدل على التعيين."},
+{n:20,y:"1998/1",q:"قيل للعتيبي: (من أشعر الناس؟) قال: (عندي أم عند الناس؟) قيل: الناس.\nقال امرؤ القيس: ... وتقدرون لمن هذا الشعر؟\nأولاً: قدّر المحذوف في (عندي أم عند الناس؟).\nثانياً: ما نوع الاستفهام في (وتقدرون)؟ وكيف تستبدل (هل) بالهمزة؟",a:"أولاً: قدّر المحذوف من الكلام للتخفيف والتقدير (أعندي أم عند الناس؟).\nثانياً: تصديقي، وهل تدرون؟"},
+{n:21,y:"1998/1",q:"ألستم خيرَ من ركب المطايا\nوأندى العالمين بطونَ راحِ\nاجعل (هل) استبدالاً بالهمزة ممكناً مع مراعاة ما تحته خط.",a:"هل أنتم خيرٌ من ركب؟ أو هل أنتم خيرٌ من ركب المطايا؟"},
+{n:22,y:"1999/1",q:"قال تعالى: ﴿أَلَمْ يَعْلَمْ بِأَنَّ اللَّهَ يَرَى﴾\nتميزت همزة الاستفهام بخاصية من خصائصها، فما هي؟",a:"ألم: دخلت على الجملة المنفية."},
+{n:23,y:"1999/1",q:"أليس فيك من العشاق حيرتهم\nفكيف لا يفهم العشاق نجواك\nبماذا اختصت الهمزة في البيت؟",a:"أليس: دخلت على الجملة المنفية."},
+{n:24,y:"2001/1",q:"قال تعالى: ﴿أَوَلَمْ يَرَوْا إِلَى مَا خَلَقَ اللَّهُ﴾\nاذكر خصائص الهمزة الواردة في النص الكريم.",a:"أولم: الهمزة لها الصدارة في الكلام لأنها سبقت حرف العطف (الواو)، ودخلت على جملة منفية."},
+{n:25,y:"2001/1",q:"يا دار سعدى ما لربعك خاشعاً\nحلّ البلى بطولها فأحالها\nاستخرج ما تجد في النص من استفهام مبيناً نوعه والسبب.",a:"ما لربعك: تصوري؛ السبب لأن الإجابة عنه بالتعيين.\nحلّ البلى: تصديقي والتقدير (أحلّ البلى؟)؛ السبب لأن الإجابة عنه بحرف الجواب."},
+{n:26,y:"2001/2",q:"قال تعالى: ﴿أَفَأَمِنَ الَّذِينَ مَكَرُوا السَّيِّئَاتِ أَنْ يَخْسِفَ اللَّهُ بِهِمُ الْأَرْضَ أَوْ يَأْتِيَهُمُ الْعَذَابُ مِنْ حَيْثُ لَا يَشْعُرُونَ﴾\nاذكر خصائص الهمزة الواردة في النص الكريم.",a:"أفأمن: لها الصدارة في الكلام لأنها سبقت حرف العطف (الفاء).\nأوَلَم: لها الصدارة في الكلام لأنها سبقت حرف العطف (الواو)، ودخلت على الجملة المنفية."},
+{n:27,y:"2002/2 · 2015/ت · 2016/ت",q:"قال رسول الله (صلى الله عليه وسلم): (أتدرون من خيركم عند الله؟)\nفي النص الشريف استفهامان، استخرجهما مبيناً نوعهما.",a:"أتدرون: تصديقي.\nمن خيركم: تصوري."},
+{n:28,y:"2003/1",q:"فما بال كتفي لا يردّ جوابها\nفهل أكرمتَ ألا تقابل بالردّ\nاستبدل بحرف الاستفهام حرفاً آخر، واكتب العبارة مع التعليل.",a:"(أفأكرمت...؟)؛ لأن الهمزة لها الصدارة في الكلام وسبقت حرف العطف (الفاء)."},
+{n:29,y:"2003/1",q:"تسائلني من الشرق أنت\nفقلت أجل من بقايا العرب\nثمة حرف محذوف دل عليه، مبيناً سبب حذفه.",a:"حذفت الهمزة من الكلام للتخفيف والتقدير (أمن الشرق...؟)."},
+{n:30,y:"2003/2",q:"أبدري الربع أي دم أراق\nوأي قلوب هذا الركب شاقا\nفي البيت ثلاثة أساليب استفهامية، حددها وبيّن نوع كل منها.",a:"أبدري: تصديقي.\nأي دم: تصوري.\nأي قلوب: تصوري."},
+{n:31,y:"2004/1",q:"قدمت على الكريم بغير زاد\nمن الأعمال ذا ذنب عظيم\nما نوع الاستفهام وما ميزة أداته؟",a:"نوع الاستفهام: تصديقي.\nميزة أداته: حذفت من الكلام للتخفيف والتقدير (أإذا ذنبت...؟)."},
+{n:32,y:"2004/2 · 2009/2",q:"قال تعالى: ﴿وَإِذْ جَاءَتْهُمُ الْحُجَّةُ وَفِرْعَوْنُ قَالُوا أَجِئْتَنَا لِتَلْفِتَنَا عَمَّا وَجَدْنَا عَلَيْهِ آبَاءَنَا﴾\nأولاً: في الآية الكريمة خصوصية من خصائص الهمزة، دل عليها.\nثانياً: وضح الاستفهام في الآية الكريمة، وبيّن نوعه والدليل.",a:"أولاً: حذفت الهمزة من الكلام للتخفيف والتقدير (أإن لنا...).\nثانياً: (أجئتنا): تصديقي والتقدير (أإن لنا...؟)، الدليل: وجود حرف الجواب (نعم)."},
+{n:33,y:"2005/2 · 2004/2",q:"متى تجيب بالحرف (نعم)؟",a:"تجيب به إذا كان الاستفهام تصديقياً سواء أكان مثبتاً أم منفياً."},
+{n:34,y:"2005/1 · 2016/3 · 2020/1/ت",q:"ألم ترَ النواوئ كيف تسمو\nإلى أهل النوافل والفضول\nأولاً: في البيت خصوصية من خصائص الهمزة، دل عليها.\nثانياً: ما خصوصية الهمزة في الجملة المنفية؟",a:"ألم: دخلت على الجملة المنفية."}
 ];
-let index=0;
-const $=id=>document.getElementById(id);
-function render(){const x=questions[index];$("number").textContent="السؤال "+(index+1);$("question").textContent=x.q;$("answer").style.display="none";$("answer").textContent="الجواب: "+x.a+"\n\nالسنوات والأدوار: "+x.years;$("student").value="";$("count").textContent=(index+1)+" من "+questions.length+" أسئلة تجريبية";}
-$("reveal").onclick=()=>{$("answer").style.display="block";};
-$("prev").onclick=()=>{index=(index-1+questions.length)%questions.length;render();};
-$("next").onclick=()=>{index=(index+1)%questions.length;render();};
-render();
+const list=document.getElementById('questions'), search=document.getElementById('search'), year=document.getElementById('filterYear'), count=document.getElementById('count');
+const years=[...new Set(data.flatMap(x=>x.y.split(' · ')))].sort(); years.forEach(y=>{let o=document.createElement('option');o.value=y;o.textContent=y;year.append(o)});
+function render(){let s=search.value.trim().toLowerCase(), y=year.value;let rows=data.filter(x=>(!y||x.y.split(' · ').includes(y))&&(!s||(x.q+' '+x.a+' '+x.y).toLowerCase().includes(s)));count.textContent='عرض '+rows.length+' من '+data.length+' سؤالاً';list.innerHTML='';rows.forEach(x=>{let c=document.createElement('article');c.className='card';let m=document.createElement('div');m.className='meta';m.innerHTML='<span class="tag">السؤال '+x.n+'</span>'+x.y.split(' · ').map(v=>'<span class="tag">'+v+'</span>').join('');let q=document.createElement('div');q.className='question';q.textContent=x.q;let t=document.createElement('textarea');t.placeholder='اكتبي إجابتج هنا (اختياري)...';let b=document.createElement('button');b.textContent='كشف الإجابة';let a=document.createElement('div');a.className='answer';a.textContent=x.a;b.onclick=()=>{a.style.display=a.style.display==='block'?'none':'block';b.textContent=a.style.display==='block'?'إخفاء الإجابة':'كشف الإجابة'};c.append(m,q,t,b,a);list.append(c)})}
+search.addEventListener('input',render);year.addEventListener('change',render);document.getElementById('reset').onclick=()=>{search.value='';year.value='';render()};render();
 </script></body></html>
